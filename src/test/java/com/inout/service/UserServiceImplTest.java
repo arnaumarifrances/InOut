@@ -10,6 +10,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.when;
@@ -29,7 +31,7 @@ class UserServiceImplTest {
     @Test
     void testRegisterEmployee_success() {
         RegisterEmployeeDTO dto = new RegisterEmployeeDTO(
-                "Alice", "alice@inout.com", "pass1234", "Sales", "Manager"
+                "Drölma", "drolma@inout.com", "pass1234", "Sales", "Manager"
         );
 
         when(passwordEncoder.encode("pass1234")).thenReturn("ENCRYPTED_PASS");
@@ -41,8 +43,9 @@ class UserServiceImplTest {
 
         UserDTO result = userService.registerEmployee(dto);
 
-        assertEquals("Alice", result.getName());
-        assertEquals("alice@inout.com", result.getEmail());
+        assertEquals("Dölma", result.getName());
+        assertEquals("drolma@inout.com", result.getEmail());
         assertEquals("EMPLOYEE", result.getRole());
     }
 }
+         
