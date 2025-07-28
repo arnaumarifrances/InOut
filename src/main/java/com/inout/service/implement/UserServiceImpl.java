@@ -1,10 +1,11 @@
-package com.inout.service;
+package com.inout.service.implement;
 
+import com.inout.enums.UserRole;
 import com.inout.dto.RegisterEmployeeDTO;
 import com.inout.dto.UserDTO;
 import com.inout.model.Employee;
-import com.inout.model.UserRole;
 import com.inout.repository.EmployeeRepository;
+import com.inout.service.interf.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

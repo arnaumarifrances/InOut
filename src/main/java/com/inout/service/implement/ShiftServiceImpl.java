@@ -1,10 +1,11 @@
-package com.inout.service;
+package com.inout.service.implement;
 
 import com.inout.dto.ShiftDTO;
 import com.inout.model.Employee;
 import com.inout.model.Shift;
 import com.inout.repository.EmployeeRepository;
 import com.inout.repository.ShiftRepository;
+import com.inout.service.interf.ShiftService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

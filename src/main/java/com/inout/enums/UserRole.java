@@ -1,4 +1,4 @@
-package com.inout.model;
+package com.inout.enums;
 
 public enum UserRole {
     EMPLOYEE,

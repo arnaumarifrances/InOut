@@ -1,4 +1,4 @@
-package com.inout.service;
+package com.inout.service.implement;
 
 import com.inout.model.User;
 import com.inout.repository.UserRepository;

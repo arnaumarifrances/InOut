@@ -2,7 +2,7 @@ package com.inout.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.inout.dto.ShiftDTO;
-import com.inout.service.ShiftService;
+import com.inout.service.interf.ShiftService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;

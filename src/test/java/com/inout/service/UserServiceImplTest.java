@@ -4,6 +4,7 @@ import com.inout.dto.RegisterEmployeeDTO;
 import com.inout.dto.UserDTO;
 import com.inout.model.Employee;
 import com.inout.repository.EmployeeRepository;
+import com.inout.service.implement.UserServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

@@ -3,7 +3,7 @@ package com.inout.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.inout.dto.RegisterEmployeeDTO;
 import com.inout.dto.UserDTO;
-import com.inout.service.UserService;
+import com.inout.service.interf.UserService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -6,8 +6,7 @@
 
 ## 📊 Class Diagram
 
-[UML Class Diagram.png](../UML%20Class%20Diagram.png)
-
+[UML Class Diagram.png](UML%20Class%20Diagram.png)
 ---
 
 ## 🚀 Setup

@@ -1,7 +1,7 @@
 package com.inout.controller;
 
 import com.inout.dto.ShiftDTO;
-import com.inout.service.ShiftService;
+import com.inout.service.interf.ShiftService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

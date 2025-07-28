@@ -1,4 +1,4 @@
-package com.inout.service;
+package com.inout.service.interf;
 
 import com.inout.dto.ShiftDTO;
 
