@@ -1,6 +1,6 @@
 # InOut
 
-**InOut** es una API REST desarrollada con Java y Spring Boot que permite a empleados fichar su entrada y salida del trabajo, y a los administradores consultar los turnos de todos los empleados.
+InOut is a REST API developed with Java and Spring Boot, enabling employees to log their check-ins and check-outs, while administrators can view the shifts of all employees.
 
 ---
 
@@ -11,9 +11,9 @@
 
 ## 🚀 Setup
 
-1. Clona el repositorio.
-2. Crea una base de datos MySQL llamada `inout_db`
-3. Configura `application.properties`:
+1. Clone the repository.
+2. Create a MySQL database called `inout_db`.
+3. Configure `application.properties`:
    ```properties
    spring.datasource.url=jdbc:mysql://localhost:3314/inout_db?createDatabaseIfNotExist=true&serverTimezone=UTC
    spring.datasource.username=root
@@ -21,7 +21,7 @@
    spring.jpa.hibernate.ddl-auto=update
    spring.jpa.show-sql=true
    ```
-4. Ejecuta la aplicación desde tu IDE o con:
+4. Run the application either from your IDE or by using the following Maven command:
    ```bash
    mvn spring-boot:run
    ```
@@ -36,25 +36,25 @@
 - Spring Security + JWT
 - MySQL
 - Lombok
-- Postman / DBeaver (para pruebas)
+- Postman / DBeaver (for testing)
 - Maven
 
 ---
 
 ## 📦 Controllers & Routes
 
-### 🧑‍💼 Registro
+### 🧑‍💼 User Registration
 
 - `POST /users/register`  
-  → Registra un nuevo empleado
+  → Registers a new employee.
 
 ### 🔐 Login
 
 - `POST /api/login`  
-  → Devuelve un JWT si las credenciales son válidas
+  → Returns a JWT if the credentials are valid.
 
-#### Ejemplo de login con Postman
-- Método: POST
+#### Example login with Postman:
+- Method: POST
 - URL: `http://localhost:8080/api/login`
 - Body: raw (JSON)
 
@@ -65,51 +65,61 @@
 }
 ```
 
-→ Respuesta: `{ "token": "..." }`
+→ Response: `{ "token": "..." }`
 
-### ⏱️ Fichajes
+### ⏱️ Shifts
 
 - `POST /shifts/checkin?employeeId={id}`  
-  → Fichar entrada
+  →  Logs the employee's check-in.
 - `POST /shifts/checkout?employeeId={id}`  
-  → Fichar salida
+  → Logs the employee's check-out.
 - `GET /shifts/me?employeeId={id}`  
-  → Ver turnos propios
-- `GET /shifts` *(solo admin)*  
-  → Ver todos los turnos
+  → View the employee's own shifts.
+- `GET /shifts` *(admin only)*  
+  → View all shifts.
+- `PATCH /shifts/{shiftId}`
+  → Partially update a shift (e.g., update only the checkIn, checkOut, or totalHours). This method accepts a partial update of a shift.
+  Example:
 
-> ⚠️ Todas las rutas protegidas requieren JWT en el header:  
+```json
+  {
+  "checkIn": "2024-07-01T09:00:00",
+  "totalHours": 8.0
+  }
+```
+- `DELETE /shifts/{shiftId}`
+  → Deletes a specific shift by its shiftId. This method allows an admin to remove a shift from the system.
+
+> ⚠️ All protected routes require a JWT in the header:
 > `Authorization: Bearer <token>`
 
 ---
 
-## 🔐 Roles y Seguridad
+## 🔐 Roles & Security
 
-- `ROLE_EMPLOYEE` → Puede fichar y ver sus propios turnos.
-- `ROLE_ADMIN` → Puede ver todos los fichajes y gestionar usuarios.
+- `ROLE_EMPLOYEE` → Can log their own check-ins/outs and view their shifts.
+- `ROLE_ADMIN` → Can view all shifts and manage users.
 
 ---
 
 ## 🔄 Future Work
 
-- Dashboard web para admins
-- Notificaciones de retrasos
-- Exportar fichajes a Excel/PDF
-- App móvil
+- Web dashboard for admins
+- Notifications for tardiness
+- Export shifts to Excel/PDF
+- Mobile app
 
 ---
 
 ## 📁 Extra Links
 
-- [Trello](#)
-- [Presentación](#)
 - [Postman Collection](#)
 
 ---
 
 ## 👨‍💻 Team Members
 
-- Arni (Desarrollador fullstack)
+- Arni (Full-stack Developer)
 
 ---
 
@@ -118,3 +128,4 @@
 - Ironhack Class Materials
 - Spring Boot Documentation
 - JWT & Spring Security Docs
+- IA
