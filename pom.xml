@@ -60,7 +60,7 @@
 			<scope>runtime</scope>
 		</dependency>
 
-		<!-- JWT (recomendada configuración modular) -->
+		<!-- JWT  -->
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt-api</artifactId>
@@ -74,7 +74,7 @@
 		</dependency>
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
-			<artifactId>jjwt-jackson</artifactId> <!-- usa Jackson para parsing -->
+			<artifactId>jjwt-jackson</artifactId> <!-- Jackson for parsing -->
 			<version>${jjwt.version}</version>
 			<scope>runtime</scope>
 		</dependency>
@@ -92,10 +92,17 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<!-- security -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.auth0</groupId>
+			<artifactId>java-jwt</artifactId>
+			<version>3.18.1</version>
 		</dependency>
 	</dependencies>
 

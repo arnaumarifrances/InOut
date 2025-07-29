@@ -1,6 +1,7 @@
 package com.inout.security.filters;
 
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.security.Keys;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -11,11 +12,13 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.security.Key;
 import java.util.Collections;
 
 public class CustomAuthorizationFilter extends OncePerRequestFilter {
-
-    private final String SECRET = "inout_secret_key";
+    private static final Key KEY = Keys.hmacShaKeyFor("clave-que-flipas-en-colores-a-tope-de-power".getBytes(StandardCharsets.UTF_8));
+    // private final String SECRET = "admin123456789adminadmin";
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
@@ -26,7 +29,7 @@ public class CustomAuthorizationFilter extends OncePerRequestFilter {
             String token = header.substring(7); // Get the token
             try {
             var claims = Jwts.parser()
-                    .setSigningKey(SECRET)
+                    .setSigningKey(KEY)
                     .parseClaimsJws(token)
                     .getBody();
 

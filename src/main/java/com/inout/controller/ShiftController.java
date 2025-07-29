@@ -15,50 +15,51 @@ public class ShiftController {
 
     private final ShiftService shiftService;
 
-    // POST: Create a new check-in
-    @PostMapping("/checkin")
-    public ResponseEntity<ShiftDTO> checkIn(@RequestParam Long employeeId) {
-        return ResponseEntity.ok(shiftService.checkIn(employeeId));
+    // POST: Create a new check-in (Employee only)
+    @PostMapping("/checkin/{employeeId}")
+    public ResponseEntity<ShiftDTO> checkIn(@PathVariable Long employeeId) {
+        ShiftDTO shiftDTO = shiftService.checkIn(employeeId);
+        return ResponseEntity.ok(shiftDTO);
     }
 
-    // POST: Create a new check-out
-    @PostMapping("/checkout")
-    public ResponseEntity<ShiftDTO> checkOut(@RequestParam Long employeeId) {
-        return ResponseEntity.ok(shiftService.checkOut(employeeId));
+    // POST: Create a new check-out (Employee only)
+    @PostMapping("/checkout/{employeeId}")
+    public ResponseEntity<ShiftDTO> checkOut(@PathVariable Long employeeId) {
+        ShiftDTO shiftDTO = shiftService.checkOut(employeeId);
+        return ResponseEntity.ok(shiftDTO);
     }
 
     // GET: Get shifts for a specific employee
-    @GetMapping("/me")
-    public ResponseEntity<List<ShiftDTO>> getMyShifts(@RequestParam Long employeeId) {
-        return ResponseEntity.ok(shiftService.getShiftsForEmployee(employeeId));
+    @GetMapping("/lookFor/{employeeId}")
+    public ResponseEntity<List<ShiftDTO>> getMyShifts(@PathVariable Long employeeId) {
+        List<ShiftDTO> shifts = shiftService.getShiftsForEmployee(employeeId);
+        return ResponseEntity.ok(shifts);
     }
 
     // GET: Get all shifts (Admin only)
     @GetMapping
     public ResponseEntity<List<ShiftDTO>> getAllShifts() {
-        return ResponseEntity.ok(shiftService.getAllShifts());
+        List<ShiftDTO> shifts = shiftService.getAllShifts();
+        return ResponseEntity.ok(shifts);
     }
 
-    // PUT: Update a shift (if needed)
+    // PUT: Update a shift (Admin or employee who owns the shift)
     @PutMapping("/{shiftId}")
     public ResponseEntity<ShiftDTO> updateShift(@PathVariable Long shiftId, @RequestBody ShiftDTO shiftDTO) {
-        // Assuming updateShift method exists in service
         ShiftDTO updatedShift = shiftService.updateShift(shiftId, shiftDTO);
         return ResponseEntity.ok(updatedShift);
     }
 
-    // PATCH: Partially update a shift (if needed)
+    // PATCH: Partially update a shift (Admin or employee who owns the shift)
     @PatchMapping("/{shiftId}")
     public ResponseEntity<ShiftDTO> partiallyUpdateShift(@PathVariable Long shiftId, @RequestBody ShiftDTO shiftDTO) {
-        // Assuming partial update method exists in service
         ShiftDTO updatedShift = shiftService.partiallyUpdateShift(shiftId, shiftDTO);
         return ResponseEntity.ok(updatedShift);
     }
 
-    // DELETE: Delete a shift
+    // DELETE: Delete a shift (Admin or employee who owns the shift)
     @DeleteMapping("/{shiftId}")
     public ResponseEntity<Void> deleteShift(@PathVariable Long shiftId) {
-        // Assuming deleteShift method exists in service
         shiftService.deleteShift(shiftId);
         return ResponseEntity.noContent().build();
     }

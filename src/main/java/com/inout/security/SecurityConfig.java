@@ -47,7 +47,7 @@ public class SecurityConfig {
 
         http.authorizeHttpRequests(auth -> auth
                 .requestMatchers("/api/login/**", "/users/register").permitAll()
-                .requestMatchers(GET, "/shifts/me").hasAnyAuthority("ROLE_EMPLOYEE", "ROLE_ADMIN")
+                .requestMatchers(GET, "/shifts/me").permitAll()
                 .requestMatchers(GET, "/shifts").hasAuthority("ROLE_ADMIN") // Only Admin can see all shifts
                 .requestMatchers(POST, "/shifts/**").hasAuthority("ROLE_EMPLOYEE")
                 .anyRequest().authenticated()

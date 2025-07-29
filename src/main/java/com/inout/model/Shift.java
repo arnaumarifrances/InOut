@@ -20,6 +20,7 @@ public class Shift {
     private Long id;
 
     @ManyToOne
+    @JoinColumn(name = "employee_id")  // Specific name of column
     private Employee employee;
 
     private LocalDateTime checkIn;

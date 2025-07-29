@@ -3,6 +3,7 @@ package com.inout.security.filters;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -13,16 +14,18 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.security.Key;
 import java.util.Date;
 import java.util.Map;
 
 @RequiredArgsConstructor
 public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
-
+    private static final Key KEY = Keys.hmacShaKeyFor("clave-que-flipas-en-colores-a-tope-de-power".getBytes(StandardCharsets.UTF_8));
     private final AuthenticationManager authenticationManager;
-    private final String SECRET = "inout_secret_key"; // This can be changed to a more secure password
 
-    //user authentication
+
+      //user authentication
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) {
         try {
@@ -53,7 +56,7 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
                 .claim("roles", role)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + 86400000)) // 1 day until expiration
-                .signWith(SignatureAlgorithm.HS256, SECRET) // HS256 is a secret key
+                .signWith(SignatureAlgorithm.HS256, KEY) // HS256 is a secret key
                 .compact();
         // Send the JWT how answer
         response.setContentType("application/json");

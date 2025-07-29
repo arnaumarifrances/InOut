@@ -3,6 +3,7 @@
 *.jar
 *.war
 *.log
+.env
 
 # Maven
 /target/
