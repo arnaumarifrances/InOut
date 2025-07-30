@@ -1,15 +1,38 @@
-# InOut
+# InOut - Attendance Management System 🕒
 
-InOut is a REST API developed with Java and Spring Boot, enabling employees to log their check-ins and check-outs, while administrators can view the shifts of all employees.
+---
+
+## Overview 🚀
+
+**InOut** is an employee attendance management system designed to simplify the process of tracking employee work hours. The application allows employees to check in and check out, and enables administrators to manage and view employee shifts and records.
+
+The system includes features such as:
+- 🧑‍💼 **Employee login and registration**.
+- ⏰ **Check-in and check-out functionality**.
+- 📊 **Shift tracking and management**.
+- 🏢 **Admin view of all shifts**.
 
 ---
 
 ## 📊 Class Diagram
-
 [UML Class Diagram.png](UML%20Class%20Diagram.png)
+
 ---
 
-## 🚀 Setup
+## 🧱Technologies Used ⚙️
+- **Spring Boot**: The core framework for building the backend of the application.
+- **Spring Security**: For handling authentication and authorization with **JWT tokens**.
+- **Spring Data JPA**: For database access and managing entities.
+- **MySQL**: The database used for storing employee and shift data.
+- **JWT (JSON Web Tokens)**: For secure authentication and authorization.
+- **Lombok**: To reduce boilerplate code with annotations for getters, setters, constructors, etc.
+- **JUnit 5**: For unit testing the application.
+- **Maven**: For dependency management and building the project.
+- **IntelliJ IDEA**: The IDE used for development.
+
+---
+
+## ⚙️ Setup
 
 1. Clone the repository.
 2. Create a MySQL database called `inout_db`.
@@ -21,105 +44,99 @@ InOut is a REST API developed with Java and Spring Boot, enabling employees to l
    spring.jpa.hibernate.ddl-auto=update
    spring.jpa.show-sql=true
    ```
-4. Run the application either from your IDE or by using the following Maven command:
+4. Run the application from your IDE or use the following command:
    ```bash
    mvn spring-boot:run
    ```
-
+   
 ---
 
-## 🧱 Technologies Used
+## 📦 Controllers and Routes 📬
 
-- Java 17
-- Spring Boot
-- Spring Data JPA
-- Spring Security + JWT
-- MySQL
-- Lombok
-- Postman / DBeaver (for testing)
-- Maven
-
----
-
-## 📦 Controllers & Routes
-
-### 🧑‍💼 User Registration
+### 🧑‍💼 **Register**
 
 - `POST /users/register`  
-  → Registers a new employee.
+  → Register a new employee.
 
-### 🔐 Login
+### 🔐 **Login**
 
 - `POST /api/login`  
-  → Returns a JWT if the credentials are valid.
+  → Returns a **JWT** if the credentials are valid.
 
-#### Example login with Postman:
-- Method: POST
-- URL: `http://localhost:8080/api/login`
-- Body: raw (JSON)
+#### Example of login with Postman
+- **Method**: `POST`
+- **URL**: `http://localhost:8080/api/login`
+- **Body**: raw (JSON)
 
-```json
+ ```json
 {
   "email": "arni@inout.com",
   "password": "employee1234"
 }
 ```
 
-→ Response: `{ "token": "..." }`
+→ Expected Response: `{ "token": "..." }`
 
 ### ⏱️ Shifts
-
 - `POST /shifts/checkin?employeeId={id}`  
-  →  Logs the employee's check-in.
+  → Check in
 - `POST /shifts/checkout?employeeId={id}`  
-  → Logs the employee's check-out.
+  → Check out
 - `GET /shifts/me?employeeId={id}`  
-  → View the employee's own shifts.
-- `GET /shifts` *(admin only)*  
-  → View all shifts.
-- `PATCH /shifts/{shiftId}`
-  → Partially update a shift (e.g., update only the checkIn, checkOut, or totalHours). This method accepts a partial update of a shift.
-  Example:
+  → View own shifts
+- `GET /shifts` *(solo admin)*  
+  → View all shifts
 
-```json
-  {
-  "checkIn": "2024-07-01T09:00:00",
-  "totalHours": 8.0
-  }
-```
-- `DELETE /shifts/{shiftId}`
-  → Deletes a specific shift by its shiftId. This method allows an admin to remove a shift from the system.
-
-> ⚠️ All protected routes require a JWT in the header:
+> ⚠️ All protected routes require JWT in the header:  
 > `Authorization: Bearer <token>`
 
 ---
 
-## 🔐 Roles & Security
+## 🔐 Roles and Security
 
-- `ROLE_EMPLOYEE` → Can log their own check-ins/outs and view their shifts.
+- `ROLE_EMPLOYEE` →  Can clock in and view their own shifts.
 - `ROLE_ADMIN` → Can view all shifts and manage users.
 
 ---
 
-## 🔄 Future Work
+## ⚡Key Development Challenges 
 
-- Web dashboard for admins
-- Notifications for tardiness
-- Export shifts to Excel/PDF
-- Mobile app
+1. **JWT Authentication**:
+  - Implementing secure authentication using **JWT tokens** was a key challenge, as it required careful handling of tokens for both employee and admin roles, ensuring that only authorized users could access certain resources.
+
+2. **Shift Management**:
+  - Developing a system that accurately tracks employee shifts, handles **check-in/check-out** logic, and calculates the total hours worked involved careful planning of the business logic.
+
+3. **Database Design**:
+  - Ensuring the right relationships between entities like `Employee`, `Shift`, and `User` was critical to allow flexible querying and efficient data retrieval.
+
+4. **Spring Security Configuration**:
+  - Configuring **Spring Security** to handle both **admin** and **employee** roles, with specific access permissions for each, was a complex but necessary part of the system.
 
 ---
 
-## 📁 Extra Links
+## Future Implementations 💡
 
-- [Postman Collection](#)
+1. **Advanced Reporting**:
+  - Adding features to generate reports for admins, such as **total hours worked**, **employee attendance**, and other statistics.
+
+2. **Mobile App Integration**:
+  - Potential integration with **mobile apps** to allow employees to clock in and out from their phones.
+
+3. **Notifications**:
+  - Implementing **notifications** for employees and admins about upcoming shifts, missed check-ins, or errors in the shift data.
+
+4. **Shift Approval Workflow**:
+  - Adding an **approval workflow** for employees' shifts, where managers or HR can approve or modify shift records.
+
+5. **Employee Dashboard**:
+  - A more detailed **dashboard** for employees to see their shift history, upcoming shifts, and performance metrics.
 
 ---
 
 ## 👨‍💻 Team Members
 
-- Arni (Full-stack Developer)
+- Arni (Full stack Developer)
 
 ---
 
@@ -128,4 +145,3 @@ InOut is a REST API developed with Java and Spring Boot, enabling employees to l
 - Ironhack Class Materials
 - Spring Boot Documentation
 - JWT & Spring Security Docs
-- IA
