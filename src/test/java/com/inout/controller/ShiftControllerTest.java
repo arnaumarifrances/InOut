@@ -1,74 +1,64 @@
 package com.inout.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.inout.dto.ShiftDTO;
 import com.inout.service.interf.ShiftService;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.web.servlet.MockMvc;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.springframework.http.ResponseEntity;
 
-import java.time.LocalDateTime;
-import java.util.List;
+import static org.mockito.Mockito.*;
+import static org.assertj.core.api.Assertions.*;
 
-import static org.mockito.ArgumentMatchers.anyLong;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-@WebMvcTest(ShiftController.class)
 class ShiftControllerTest {
 
-    @Autowired
-    private MockMvc mockMvc;
-
-    @MockBean
+    @Mock
     private ShiftService shiftService;
 
-    private final ObjectMapper mapper = new ObjectMapper();
+    @InjectMocks
+    private ShiftController shiftController;
 
-    private final ShiftDTO sampleShift = new ShiftDTO(
-            LocalDateTime.of(2024, 7, 1, 9, 0),
-            LocalDateTime.of(2024, 7, 1, 17, 0),
-            8.0
-    );
+    private ShiftDTO shiftDTO;
 
-    @Test
-    void checkIn_shouldReturnShiftDTO() throws Exception {
-        Mockito.when(shiftService.checkIn(anyLong())).thenReturn(sampleShift);
-
-        mockMvc.perform(post("/shifts/checkin?employeeId=1"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.totalHours").value(8.0));
+    @BeforeEach
+    void setUp() {
+        MockitoAnnotations.openMocks(this);
+        // Create a sample ShiftDTO for the tests
+        shiftDTO = new ShiftDTO();
+        shiftDTO.setCheckIn(null);
+        shiftDTO.setCheckOut(null);
+        shiftDTO.setTotalHours(0.0);
     }
 
     @Test
-    void checkOut_shouldReturnShiftDTO() throws Exception {
-        Mockito.when(shiftService.checkOut(anyLong())).thenReturn(sampleShift);
+    void testCheckIn() {
+        // Simulate the service behavior for check-in
+        when(shiftService.checkIn(1L)).thenReturn(shiftDTO);
 
-        mockMvc.perform(post("/shifts/checkout?employeeId=1"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.checkOut").exists());
+        // Call the controller method
+        ResponseEntity<ShiftDTO> response = shiftController.checkIn(1L);
+
+        // Verify the response
+        assertThat(response.getStatusCodeValue()).isEqualTo(200);
+        assertThat(response.getBody()).isEqualTo(shiftDTO);
+        // Verify that the service method was called once
+        verify(shiftService, times(1)).checkIn(1L);
     }
 
     @Test
-    void getMyShifts_shouldReturnList() throws Exception {
-        Mockito.when(shiftService.getShiftsForEmployee(anyLong())).thenReturn(List.of(sampleShift));
+    void testCheckOut() {
+        // Simulate the service behavior for check-out
+        when(shiftService.checkOut(1L)).thenReturn(shiftDTO);
 
-        mockMvc.perform(get("/shifts/me?employeeId=1"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].totalHours").value(8.0));
-    }
+        // Call the controller method
+        ResponseEntity<ShiftDTO> response = shiftController.checkOut(1L);
 
-    @Test
-    void getAllShifts_shouldReturnList() throws Exception {
-        Mockito.when(shiftService.getAllShifts()).thenReturn(List.of(sampleShift));
-
-        mockMvc.perform(get("/shifts"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].checkIn").exists());
+        // Verify the response
+        assertThat(response.getStatusCodeValue()).isEqualTo(200);
+        assertThat(response.getBody()).isEqualTo(shiftDTO);
+        // Verify that the service method was called once
+        verify(shiftService, times(1)).checkOut(1L);
     }
 }

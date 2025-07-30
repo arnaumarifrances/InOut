@@ -62,4 +62,7 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
         response.setContentType("application/json");
         new ObjectMapper().writeValue(response.getOutputStream(), Map.of("token", token));
     }
+
+    public void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) {
+    }
 }
