@@ -15,20 +15,21 @@ The system includes features such as:
 ---
 
 ## 📊 Class Diagram
-[UML Class Diagram.png](UML%20Class%20Diagram.png)
+![UML Class Diagram.png](UML%20Class%20Diagram.png)
 
 ---
 
 ## 🧱Technologies Used ⚙️
+- **IntelliJ IDEA**: The IDE used for development.
 - **Spring Boot**: The core framework for building the backend of the application.
-- **Spring Security**: For handling authentication and authorization with **JWT tokens**.
 - **Spring Data JPA**: For database access and managing entities.
-- **MySQL**: The database used for storing employee and shift data.
-- **JWT (JSON Web Tokens)**: For secure authentication and authorization.
+-  **MySQL**: The database used for storing employee and shift data.
 - **Lombok**: To reduce boilerplate code with annotations for getters, setters, constructors, etc.
 - **JUnit 5**: For unit testing the application.
+- **Spring Security**: For handling authentication and authorization with **JWT tokens**.
+- **JWT (JSON Web Tokens)**: For secure authentication and authorization.
+- **Lombok**: To reduce boilerplate code with annotations for getters, setters, constructors, etc.
 - **Maven**: For dependency management and building the project.
-- **IntelliJ IDEA**: The IDE used for development.
 
 ---
 
@@ -101,10 +102,7 @@ The system includes features such as:
 
 ## ⚡Key Development Challenges 
 
-1. **JWT Authentication**:
-  - Implementing secure authentication using **JWT tokens** was a key challenge, as it required careful handling of tokens for both employee and admin roles, ensuring that only authorized users could access certain resources.
-
-2. **Shift Management**:
+1. **Shift Management**:
   - Developing a system that accurately tracks employee shifts, handles **check-in/check-out** logic, and calculates the total hours worked involved careful planning of the business logic.
 
 3. **Database Design**:
@@ -113,25 +111,29 @@ The system includes features such as:
 4. **Spring Security Configuration**:
   - Configuring **Spring Security** to handle both **admin** and **employee** roles, with specific access permissions for each, was a complex but necessary part of the system.
 
+5. **JWT Authentication**:
+  - Implementing secure authentication using **JWT tokens** was a key challenge, as it required careful handling of tokens for both employee and admin roles, ensuring that only authorized users could access certain resources.
 ---
 
 ## Future Implementations 💡
 
-1. **Advanced Reporting**:
-  - Adding features to generate reports for admins, such as **total hours worked**, **employee attendance**, and other statistics.
+1. **Scalable and Robust System**:
+  - Enhance the system's architecture to ensure scalability and robustness as the number of users and data grows.
 
-2. **Mobile App Integration**:
-  - Potential integration with **mobile apps** to allow employees to clock in and out from their phones.
+2. **Implement Graphs and Calendars**:
+  - Add visual features such as attendance graphs and interactive calendars so employees and administrators can easily view shifts and statistics.
 
-3. **Notifications**:
-  - Implementing **notifications** for employees and admins about upcoming shifts, missed check-ins, or errors in the shift data.
+3. **Frontend**:
+  - Develop a more intuitive and user-friendly interface, improving the experience for both employees and administrators..
 
-4. **Shift Approval Workflow**:
-  - Adding an **approval workflow** for employees' shifts, where managers or HR can approve or modify shift records.
+4. **Mobile App**:
+  - Create a mobile app that allows employees to clock in and out directly from their phones, improving flexibility and accessibility.
 
-5. **Employee Dashboard**:
-  - A more detailed **dashboard** for employees to see their shift history, upcoming shifts, and performance metrics.
+5. **RFID Card-Based Time Tracking System**:
+  - Integrate an automated time tracking system using RFID cards to simplify the check-in/check-out process and avoid human errors.
 
+6. **Client Meetings for Specifications (URS)**:
+- Engage with the client to gain a clearer understanding of user specifications and needs, adapting the system to those requirements.
 ---
 
 ## 👨‍💻 Team Members
